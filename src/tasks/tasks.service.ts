@@ -25,9 +25,34 @@ export class TasksService {
     return task;
   }
 
-  public getTask(id: string): ITask {
+  public getTaskById(id: string): ITask {
     const findTask = this.tasks.find((task) => task.id === id);
 
     return findTask;
+  }
+
+  public deleteTaskById(id: string): void {
+    const filterTasks = this.tasks.filter((task) => task.id !== id);
+
+    this.tasks = filterTasks;
+  }
+
+  public updateTaskStatus(id: string, status: ETaskStatus): ITask {
+    const task = this.getTaskById(id);
+
+    task.status = status;
+
+    return task;
+  }
+
+  public updateTask(
+    id: string,
+    { title, description, color }: CreateTaskDto,
+  ): ITask {
+    const task = this.getTaskById(id);
+
+    Object.assign(task, { title, description, color });
+
+    return task;
   }
 }

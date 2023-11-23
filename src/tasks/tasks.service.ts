@@ -28,7 +28,7 @@ export class TasksService {
   public getTaskById(id: string): ITask {
     const findTask = this.tasks.find((task) => task.id === id);
 
-    return findTask;
+    return findTask!;
   }
 
   public deleteTaskById(id: string): void {

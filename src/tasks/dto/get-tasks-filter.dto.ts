@@ -1,6 +1,4 @@
-import { ETaskStatus } from '../task.model';
+import { createZodDto } from 'nestjs-zod';
+import { TasksFilterSchema } from 'src/contracts';
 
-export class GetTasksFilterDto {
-  status?: ETaskStatus;
-  search?: string;
-}
+export class GetTasksFilterDto extends createZodDto(TasksFilterSchema) {}

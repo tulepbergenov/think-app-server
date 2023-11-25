@@ -9,10 +9,13 @@ import {
   Query,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { ETaskStatus, ITask } from './task.model';
-import { CreateTaskDto } from './dto/create-task.dto';
+import { ITask } from './task.model';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
+import {
+  UpdateTaskStatusDto,
+  CreateTaskDto,
+  GetTasksFilterDto,
+} from './task.dto';
 
 @ApiTags('tasks')
 @Controller('tasks')
@@ -53,17 +56,17 @@ export class TasksController {
   @ApiOperation({ summary: 'Update task status' })
   updateTaskStatus(
     @Param('id') id: string,
-    @Body('status') status: ETaskStatus,
+    @Body() updateTaskStatusDto: UpdateTaskStatusDto,
   ): ITask {
-    return this.tasksService.updateTaskStatus(id, status);
+    return this.tasksService.updateTaskStatus(id, updateTaskStatusDto);
   }
 
   @Patch('/:id')
   @ApiOperation({ summary: 'Update task' })
   updateTask(
     @Param('id') id: string,
-    @Body() createTaskDto: CreateTaskDto,
+    @Body() updateTaskDto: CreateTaskDto,
   ): ITask {
-    return this.tasksService.updateTask(id, createTaskDto);
+    return this.tasksService.updateTask(id, updateTaskDto);
   }
 }

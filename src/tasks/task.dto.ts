@@ -4,7 +4,7 @@ import {
   TaskResponseSchema,
   TaskStatusRequestSchema,
   TasksFilterSchema,
-} from './task.command';
+} from './task.scheme';
 
 export class CreateTaskDto extends createZodDto(TaskRequestSchema) {}
 
